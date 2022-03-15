@@ -6,18 +6,18 @@ class Texture
 public:
 	Texture() : Texture(GL_RGBA, GL_RGBA, GL_REPEAT, GL_REPEAT, GL_NEAREST, GL_NEAREST) {}
 
-	Texture(GLint imageFormat)
+	explicit Texture(const GLint imageFormat)
 		: Texture(imageFormat, imageFormat, GL_REPEAT, GL_REPEAT, GL_NEAREST, GL_NEAREST)
 	{
 	}
 
 
-	Texture(GLint internalFormat, GLint imageFormat, GLint wrapS, GLint wrapT, GLint filterMin, GLint filterMag)
+	Texture(const GLint internalFormat, const GLint imageFormat, const GLint wrapS, const GLint wrapT, const GLint filterMin, const GLint filterMag)
 		:
 		internalFormat{ internalFormat }
 		, imageFormat{ imageFormat }
-		, wrap_s{ wrapS }
-		, wrap_t{ wrapT }
+		, wrapS{ wrapS }
+		, wrapT{ wrapT }
 		, filterMin{ filterMin }
 		, filterMag{ filterMag }
 		, m_id{ 0 }
@@ -47,8 +47,8 @@ public:
 	GLint imageFormat{};
 
 	// Texture configurations
-	GLint wrap_s{};
-	GLint wrap_t{};
+	GLint wrapS{};
+	GLint wrapT{};
 	GLint filterMin{};
 	GLint filterMag{};
 private:

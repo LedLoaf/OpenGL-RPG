@@ -27,9 +27,8 @@ void Shader::load(const GLchar* vsFilename, const GLchar* fsFilename)
 
 		// Convert streams into strings
 		vsCode = vsStream.str();
-	}
-	catch (std::exception& e) {
-		std::cerr << "Failed to read vertex shader: " << m_vsFilename <<" : "<< e.what() << "\n";
+	} catch (std::exception& e) {
+		std::cerr << "Failed to read vertex shader: " << m_vsFilename << " : " << e.what() << "\n";
 		exit(1);
 	}
 
@@ -46,9 +45,8 @@ void Shader::load(const GLchar* vsFilename, const GLchar* fsFilename)
 
 		// Convert streams into strings
 		fsCode = fsStream.str();
-	}
-	catch (std::exception& e) {
-		std::cerr << "Failed to read fragment shader: " << m_fsFilename <<" : "<<e.what() << "\n";
+	} catch (std::exception& e) {
+		std::cerr << "Failed to read fragment shader: " << m_fsFilename << " : " << e.what() << "\n";
 		exit(1);
 	}
 
@@ -95,16 +93,17 @@ void Shader::compile(const GLchar* vsData, const GLchar* fsData)
 	glGetProgramiv(m_id, GL_LINK_STATUS, &success);
 	if (!success) {
 		glGetProgramInfoLog(m_id, 512, nullptr, infoLog);
-		std::cerr << "Program linking failure: (id = "<<m_id<<") (VertexShader: " << vsData << ", FragmentShader : " << fsData << ")" << "\n";
+		std::cerr << "Program linking failure: (id = " << m_id << ") (VertexShader: " << vsData << ", FragmentShader : " << fsData << ")" << "\n";
+		exit(1);
 	}
 
 	// Delete shader files
 	glDeleteShader(vs);
 	glDeleteShader(fs);
-
 }
 
-void Shader::use() {
+void Shader::use()
+{
 	// Use program for drawing
 	glUseProgram(m_id);
 }
@@ -116,6 +115,5 @@ void Shader::setInt(const GLchar* name, const int value)
 
 void Shader::setMat4(const GLchar* name, glm::mat4 value)
 {
-	glUniformMatrix4fv(glGetUniformLocation(m_id, name),1,GL_FALSE, &value[0][0]);
-
+	glUniformMatrix4fv(glGetUniformLocation(m_id, name), 1,GL_FALSE, &value[0][0]);
 }

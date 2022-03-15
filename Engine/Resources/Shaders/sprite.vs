@@ -4,6 +4,7 @@ layout (location = 1) in vec2 coords;
 
 out vec2 TexCoords;
 uniform mat4 projection;      // Screen coordinates to normalized
+
 void main()
 {
     TexCoords = coords;

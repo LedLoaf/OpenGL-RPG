@@ -1,6 +1,5 @@
 #pragma once
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
 #include <glm/mat4x4.hpp>
 
 class Shader
@@ -30,9 +29,9 @@ private:
 	// Compiles and executes debug errors if found
 	void compile(const GLchar* vsData, const GLchar* fsData);
 private:
-	GLuint m_id{};
-	const GLchar* m_vsFilename;
-	const GLchar* m_fsFilename;
+	GLuint        m_id{};
+	const GLchar* m_vsFilename{};
+	const GLchar* m_fsFilename{};
 
 };
 

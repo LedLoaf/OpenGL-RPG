@@ -5,10 +5,13 @@
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
+    <ClCompile Include="src\Material.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Shader.h" />
     <ClInclude Include="src\Texture.h" />
     <ClInclude Include="src\Renderer.h" />
+    <ClInclude Include="src\Material.h" />
+    <ClInclude Include="src\stb_image.h" />
   </ItemGroup>
 </Project>
