@@ -82,7 +82,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;..\vendor\GLFW\include;..\vendor\Glad\include;..\vendor\imgui;..\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;vendor\spdlog\include;..\vendor\GLFW\include;..\vendor\Glad\include;..\vendor\imgui;..\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -148,18 +148,30 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Material.cpp" />
-    <ClCompile Include="src\Renderer.cpp" />
-    <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\DelimiterSplit.cpp" />
+    <ClCompile Include="src\Json.cpp" />
+    <ClCompile Include="src\Logger.cpp" />
+    <ClCompile Include="src\Components\MaterialComponent.cpp" />
+    <ClCompile Include="src\Components\ShaderComponent.cpp" />
+    <ClCompile Include="src\Components\RenderComponent.cpp" />
+    <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Texture.cpp" />
+    <ClCompile Include="src\Components\TextureComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Material.h" />
-    <ClInclude Include="src\Renderer.h" />
-    <ClInclude Include="src\Shader.h" />
+    <ClInclude Include="src\DelimiterSplit.h" />
+    <ClInclude Include="src\Logger.h" />
+    <ClInclude Include="src\Components\ShaderComponent.h" />
+    <ClInclude Include="src\Components\RenderComponent.h" />
+    <ClInclude Include="src\Components\MaterialComponent.h" />
+    <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\Components\BaseComponent.h" />
+    <ClInclude Include="src\Entity.h" />
+    <ClInclude Include="src\Rect.h" />
+    <ClInclude Include="src\Sort.h" />
+    <ClInclude Include="src\SplayTree.h" />
     <ClInclude Include="src\stb_image.h" />
-    <ClInclude Include="src\Texture.h" />
+    <ClInclude Include="src\Components\TextureComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
