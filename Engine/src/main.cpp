@@ -34,9 +34,9 @@ constexpr int SCREEN_HEIGHT = 768;
 constexpr auto  SPEED       = 4.0f;
 constexpr GLuint   MAX_SPRITES = 255;
 constexpr GLint ROWS = 32;
+constexpr GLint COLS = 32;
 
-Rect  SRC   = Rect{ 0.0f, 0.0f, Game::TileSize, Game::TileSize };
-Rect  DEST  = Rect{5, 5, Game::TileSize, Game::TileSize };
+Rect SRC{ 0.0f,0.0f,64.0f,64.0f };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GLOBAL FUNCTION DEFINITIONS
@@ -136,11 +136,11 @@ int main()
 	auto& tileMapMaterial = *tileMap->addComponent<Component::Material>(grassTexture, shader, 1); // grass texture
 
 	// How many columns of grass?
-	const auto grassCols = static_cast<int>(std::ceilf(Game::Width / Game::TileSize));
+	constexpr auto grassCols = COLS;
 	// How many rows of grass
-	const auto grassRows = static_cast<int>(std::ceilf(Game::Height / Game::TileSize));
+	constexpr auto grassRows = ROWS;
 	// How many total grass textures to draw?
-	const auto totalTiles = grassCols * grassRows;
+	constexpr auto totalTiles = grassCols * grassRows;
 
 	const auto tiles = new Entity();
 	tileMap->push_back_child(tiles);
