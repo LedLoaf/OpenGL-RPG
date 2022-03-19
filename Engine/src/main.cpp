@@ -47,12 +47,15 @@ void APIENTRY glDebugOutput(GLenum source, GLenum type, unsigned int id, GLenum 
 							  GLsizei length, const char* message, const void* userParam);
 int main()
 {
+	// Logger::toFile(); // save logger to file
+
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// INITIALIZATION
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
-	std::cout << "Starting Application (Initializing)\n";
+	Logger::message("Starting Application (Initializing)");
 
 	if (!glfwInit()) {
+		Logger::error("Failed to initialize GLFW", Logger::SEVERITY::HIGH);
 		std::cerr << "Failed to initialize GLFW!\n";
 		return -1;
 	}
@@ -60,6 +63,8 @@ int main()
 	// OpenGL version = major.minor (4.6)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+	// Allow debug message early
+	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 
 	// Use the deprecated functions? (CORE_PROFILE = yes, COMPATIBILITY = no)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -71,7 +76,7 @@ int main()
 	glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
 
 	if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
-		std::cerr << "Failed to initialize Glad!" << std::endl;
+		Logger::error("Failed to initialize Glad...", Logger::SEVERITY::HIGH);
 		return -1;
 	}
 
@@ -162,7 +167,7 @@ int main()
 	const auto player = new Entity();
 
 
-	auto&      playerTransform   = *player->addComponent<Component::Transform>((GLfloat)Game::Width, (GLfloat)Game::Height, 64.0f);
+	auto&      playerTransform   = *player->addComponent<Component::Transform>(Game::Width, Game::Height, 64.0f);
 	auto&      playerRender      = *player->addComponent<Component::Render>(SRC); // src is full image, dest is set up during dynamic draw
 	auto&      playerMaterial    = *player->addComponent<Component::Material>(fleshTexture, shader, 0);
 	const auto playerDynamicDraw = player->addComponent<ComponentSystemRender::DynamicDraw>(renderer, playerRender, playerMaterial, playerTransform, cameraTransform);
@@ -223,7 +228,9 @@ int main()
 	delete player;
 	delete camera;
 	delete tileMap;
-	std::cout << "Closing Application (CleanUp)\n";
+	delete camera;
+	Logger::message("Closing application...");
+
 	return 0;
 }
 
@@ -266,7 +273,8 @@ void APIENTRY glDebugOutput(const GLenum       source,
 	if (id == 131169 || id == 131185 || id == 131218 || id == 131204) return;
 
 	std::stringstream ss;
-	ss << "OpenGL error (" << id << "): " << message << std::endl;
+	ss << "OpenGL error (" << id << "): " << message << "\n";
+	Logger::error(ss.str(),Logger::SEVERITY::HIGH);
 
 	switch (source) {
 		case GL_DEBUG_SOURCE_API:             ss << "SOURCE: API"; break;
@@ -276,7 +284,7 @@ void APIENTRY glDebugOutput(const GLenum       source,
 		case GL_DEBUG_SOURCE_APPLICATION:     ss << "SOURCE: Application"; break;
 		case GL_DEBUG_SOURCE_OTHER:           ss << "SOURCE: Other"; break;
 		default: break;
-	} ss << std::endl;
+	} ss << "\n";
 
 	switch (type) {
 		case GL_DEBUG_TYPE_ERROR:               ss << "TYPE: Error"; break;
@@ -289,7 +297,7 @@ void APIENTRY glDebugOutput(const GLenum       source,
 		case GL_DEBUG_TYPE_POP_GROUP:           ss << "TYPE: Pop Group"; break;
 		case GL_DEBUG_TYPE_OTHER:               ss << "TYPE: Other"; break;
 		default: break;
-	} ss << std::endl;
+	} ss << "\n";
 
 	switch (severity) {
 		case GL_DEBUG_SEVERITY_HIGH:         ss << "GL SEVERITY: high"; break;

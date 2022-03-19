@@ -3,8 +3,6 @@
 #include "SplayTree.h"
 #include "Components/BaseComponent.h"
 
-#include "glad/glad.h"
-
 #include <array>
 #include <iostream>
 #include <memory>

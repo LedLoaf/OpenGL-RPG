@@ -1,8 +1,8 @@
 #pragma once
 #include "Components/RenderComponent.h"
-#include "Components/TransformationComponent.h"
-#include "Components/SystemComponent.h"
 #include "Components/RendererComponent.h"
+#include "Components/SystemComponent.h"
+#include "Components/TransformationComponent.h"
 
 namespace ComponentSystemRender
 {

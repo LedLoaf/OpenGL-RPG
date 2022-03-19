@@ -4,7 +4,7 @@
 #include "Components/SystemComponent.h"
 #include "Components/TransformationComponent.h"
 
-/* Camera follow */
+/* Sets up camera position with respect to the target its following, such that it is within the center of the screen, however if object is out of boundary camera will not follow */
 namespace ComponentSystemUpdate
 {
 	class Camera : public Component::System
@@ -31,7 +31,7 @@ namespace ComponentSystemUpdate
 				m_camera.rect.y = 0;
 			if (m_camera.rect.x > m_camera.rect.w * m_camera.scale - Game::Width)		// account for game screen
 				m_camera.rect.x = m_camera.rect.w * m_camera.scale - Game::Width;
-			if (m_camera.rect.y > m_camera.rect.h * m_camera.scale - Game::Height)	// account for game screen
+			if (m_camera.rect.y > m_camera.rect.h * m_camera.scale - Game::Height)		// account for game screen
 				m_camera.rect.y = m_camera.rect.h * m_camera.scale - Game::Height;
 		}
 

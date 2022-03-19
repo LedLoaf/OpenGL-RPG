@@ -1,6 +1,6 @@
 ﻿#pragma once
-#include "Components/BaseComponent.h"
 #include "Rect.h"
+#include "Components/BaseComponent.h"
 
 namespace Component
 {

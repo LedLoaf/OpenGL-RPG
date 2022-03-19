@@ -10,6 +10,7 @@
     <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\Json.cpp" />
     <ClCompile Include="src\DelimiterSplit.cpp" />
+    <ClCompile Include="src\Components\AABB.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stb_image.h" />
@@ -30,5 +31,7 @@
     <ClInclude Include="src\Systems\RenderSystem.h" />
     <ClInclude Include="src\Systems\CameraSystem.h" />
     <ClInclude Include="src\Components\RenderComponent.h" />
+    <ClInclude Include="src\Components\RectComponent.h" />
+    <ClInclude Include="src\Components\AABB.h" />
   </ItemGroup>
 </Project>

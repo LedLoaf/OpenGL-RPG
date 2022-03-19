@@ -31,7 +31,7 @@ namespace Component
 			// Convert streams into strings
 			vsCode = vsStream.str();
 		} catch (std::exception& e) {
-			std::cerr << "Failed to read vertex shader: " << m_vsFilename << " : " << e.what() << "\n";
+			Logger::error("Failed to read vertex shader: " + std::string(m_vsFilename) + " : " + std::string(e.what()), Logger::SEVERITY::LOW);
 			exit(1);
 		}
 
@@ -49,7 +49,7 @@ namespace Component
 			// Convert streams into strings
 			fsCode = fsStream.str();
 		} catch (std::exception& e) {
-			std::cerr << "Failed to read fragment shader: " << m_fsFilename << " : " << e.what() << "\n";
+			Logger::error("Failed to read fragment shader: " + std::string(m_vsFilename) + " : " + std::string(e.what()), Logger::SEVERITY::LOW);
 			exit(1);
 		}
 
@@ -66,24 +66,34 @@ namespace Component
 		const GLuint vs = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(vs, 1, &vsData, nullptr);
 		glCompileShader(vs);
-
-		// Check for vertex compile errors
-		glGetShaderiv(vs, GL_COMPILE_STATUS, &success);
-		if (!success) {
-			glGetShaderInfoLog(vs, 512, nullptr, infoLog);
-			std::cerr << "Vertex shader compilation failure: " << vsData << "\n";
-		}
-
 		// Fragment shader
 		const GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(fs, 1, &fsData, nullptr);
 		glCompileShader(fs);
 
+
+		// Check for vertex compile errors
+		glGetShaderiv(vs, GL_COMPILE_STATUS, &success);
+		if (!success) {
+			glGetShaderInfoLog(vs, 512, nullptr, infoLog);
+			std::stringstream ss;
+			ss << "Vertex shader compilation failure: " << vsData;
+			ss << infoLog;
+			Logger::error(ss.str(), Logger::SEVERITY::LOW);
+			glDeleteShader(vs);
+			glDeleteShader(fs);
+		}
+
 		// Check for fragment compile errors
 		glGetShaderiv(fs, GL_COMPILE_STATUS, &success);
 		if (!success) {
 			glGetShaderInfoLog(fs, 512, nullptr, infoLog);
-			std::cerr << "Fragment shader compilation failure: " << fsData << "\n";
+			std::stringstream ss;
+			ss << "Fragment shader compilation failure: " << vsData;
+			ss << infoLog;
+			Logger::error(ss.str(), Logger::SEVERITY::LOW);
+			glDeleteShader(vs);
+			glDeleteShader(fs);
 		}
 
 		// Shader program init
@@ -96,7 +106,10 @@ namespace Component
 		glGetProgramiv(m_id, GL_LINK_STATUS, &success);
 		if (!success) {
 			glGetProgramInfoLog(m_id, 512, nullptr, infoLog);
-			std::cerr << "Program linking failure: (id = " << m_id << ") (VertexShader: " << vsData << ", FragmentShader : " << fsData << ")" << "\n";
+			std::stringstream ss;
+			ss << "Program linking failure: (id = " << m_id << ") (VertexShader: " << vsData << ", FragmentShader : " << fsData << ")";
+			ss << infoLog;
+			Logger::error(ss.str(), Logger::SEVERITY::LOW);
 			exit(1);
 		}
 

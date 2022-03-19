@@ -7,6 +7,7 @@ namespace Component
 	class System : public IComponent
 	{
 	public:
+		System() = default;
 		virtual void execute() = 0;
 	};
 }

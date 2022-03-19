@@ -69,7 +69,7 @@ namespace Component
 		return *this;
 	}
 
-	void Renderer::draw(Rect src, Rect dest, Component::Material& mat)
+	void Renderer::draw(const Rect& src, const Rect& dest, Component::Material& mat)
 	{
 		// Checks if buffer is over sprite limit or current material isn't set
 		// Finally checks if the current material has a different id from the new material
@@ -132,7 +132,7 @@ namespace Component
 		m_buffer.push_back(normSrc.y);
 	}
 
-	void Renderer::draw(const Component::Render render, Component::Material& mat)
+	void Renderer::draw(const Component::Render& render, Component::Material& mat)
 	{
 		Component::Renderer::draw(render.src, render.dest, mat);
 	}

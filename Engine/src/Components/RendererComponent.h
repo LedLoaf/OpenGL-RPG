@@ -31,8 +31,8 @@ namespace Component
 
 		void clear(float r = 0, float g = 0, float b = 0, float a = 255);
 
-		void draw(Rect src, Rect dest, Component::Material& mat);
-		void draw(Component::Render render, Component::Material& mat);
+		void draw(const Rect& src, const Rect& dest, Component::Material& mat);
+		void draw(const Component::Render& render, Component::Material& mat);
 
 		void display();
 

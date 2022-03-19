@@ -21,7 +21,7 @@ namespace Component
 		this->height = imgHeight;
 
 		if (!image) {
-			Logger::message("Failed to load texture: " + std::string(fileName));
+			Logger::error("Failed to load texture: " + std::string(fileName), Logger::SEVERITY::LOW);
 			throw;
 		}
 		else {
