@@ -10,8 +10,8 @@ public:
 	virtual ~IComponent() { --count; } // make sure if overloaded to call ~Comp()
 
 	// Delete all functions that could possibly copy one component onto another
-	IComponent(const IComponent&) = delete;
-	IComponent(IComponent&&) = delete;
-	IComponent& operator=(const IComponent&) = delete;
-	IComponent& operator=(IComponent&&) = delete;
+	//IComponent(const IComponent&) = delete;
+	//IComponent(IComponent&&) = delete;
+	//IComponent& operator=(IComponent&) = delete;
+	//IComponent& operator=(IComponent&&) = delete;
 };

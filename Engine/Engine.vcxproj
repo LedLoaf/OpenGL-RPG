@@ -153,16 +153,21 @@
     <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\Components\MaterialComponent.cpp" />
     <ClCompile Include="src\Components\ShaderComponent.cpp" />
-    <ClCompile Include="src\Components\RenderComponent.cpp" />
+    <ClCompile Include="src\Components\RendererComponent.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Components\TextureComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Components\RenderComponent.h" />
+    <ClInclude Include="src\Systems\CameraSystem.h" />
+    <ClInclude Include="src\Systems\RenderSystem.h" />
+    <ClInclude Include="src\Components\SystemComponent.h" />
+    <ClInclude Include="src\Components\TransformationComponent.h" />
     <ClInclude Include="src\DelimiterSplit.h" />
     <ClInclude Include="src\Logger.h" />
     <ClInclude Include="src\Components\ShaderComponent.h" />
-    <ClInclude Include="src\Components\RenderComponent.h" />
+    <ClInclude Include="src\Components\RendererComponent.h" />
     <ClInclude Include="src\Components\MaterialComponent.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Components\BaseComponent.h" />

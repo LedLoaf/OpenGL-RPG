@@ -1,15 +1,17 @@
 #include "Game.h"
 
 // Game global variables
-float Game::width = 1280;
-float Game::height = 768;
-GLfloat Game::deltaTime = 0.0f;
+float Game::Width = 1280;
+float Game::Height = 768;
+float Game::TileSize = 64.f;
 
-Entity* Game::global = new Entity();
+GLfloat Game::DeltaTime = 0.0f;
 
-bool Game::exit = false;
+Entity* Game::Global = new Entity();
 
-glm::vec2 Game::removed(Game::width * -2.0f - 1.0f, Game::height * -2.0f - 1.0f);
+bool Game::Exit = false;
+
+glm::vec2 Game::Removed(Game::Width * -2.0f - 1.0f, Game::Height * -2.0f - 1.0f);
 
 // EC reference counting
 long long IComponent::count = 0ll;

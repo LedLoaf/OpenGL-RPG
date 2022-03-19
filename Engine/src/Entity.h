@@ -94,7 +94,7 @@ public:
 
 	void removeChild(std::string id)
 	{
-		auto hashedStr = std::hash<std::string>{}(id);
+		const auto hashedStr = std::hash<std::string>{}(id);
 		m_children.remove(hashedStr);
 	}
 
@@ -104,19 +104,19 @@ public:
 	}
 
 	// Inserts entity into child tree, and treats it like an array
-	Entity* push_back(Entity* child)
+	Entity* push_back_child(Entity* child)
 	{
 		return m_children.insert(child);
 	}
 
 	// Inserts entity into child tree with hash of string as unique id
-	Entity* addChild(Entity* entity, const std::string& id)
+	Entity* addIDChild(Entity* entity, const std::string& id)
 	{
 		const auto hashedStr = std::hash<std::string>{}(id);
 		return m_children.insert(hashedStr, entity);
 	}
 
-	Entity* addChild(const std::string& id)
+	Entity* addIDChild(const std::string& id)
 	{
 		const auto       entity         = new Entity();
 		const auto hashedStr = std::hash<std::string>{}(id);
@@ -124,7 +124,7 @@ public:
 	}
 
 	// inserts entity into child tree with unique id
-	Entity* addChild(Entity* entity, const std::size_t id)
+	Entity* addIDChild(Entity* entity, const std::size_t id)
 	{
 		return m_children.insert(id, entity);
 	}
@@ -238,8 +238,7 @@ public:
 	{
 		static_assert (std::is_base_of_v<IComponent, T>, "push_back() not a component");
 		T* c(new T(std::forward<TArgs>(args)...));
-		m_components.insert(c);
-		return c;
+		return static_cast<T*>(m_components.insert(c));
 	}
 
 	// Gets the array of components

@@ -1,5 +1,8 @@
 ﻿#pragma once
+#include <string>
+
 #include "BaseComponent.h"
+#include "Logger.h"
 
 #include "ShaderComponent.h"
 #include "TextureComponent.h"
@@ -16,13 +19,13 @@ namespace Component
 			id{ m_idGen++ },
 			m_texIndex{ textureIndex }
 		{
-			std::cout << "Initializing Material: TexIndex: "<<m_texIndex<<" with Texture["<<this->texture.getId()<<"] and Shader["<<this->shader.getID()<<"]\n";
+			Logger::message("Initializing Material: TexIndex: " + std::to_string(m_texIndex) + " with Texture[" + std::to_string(this->texture.getId()) + "] and Shader[" + std::to_string(this->shader.getID()) + "]");
 
 		}
 
 		~Material() override
 		{
-			std::cout << "Destroying Material: TexIndex: " << m_texIndex << " with Texture[" << texture.getId() << "] and Shader[" << shader.getID() << "]\n";
+			Logger::message("Destroying Material: TexIndex: " + std::to_string(m_texIndex) + " with Texture[" + std::to_string(this->texture.getId()) + "] and Shader[" + std::to_string(this->shader.getID()) + "]");
 
 		}
 

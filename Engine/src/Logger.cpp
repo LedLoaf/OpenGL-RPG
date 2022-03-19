@@ -20,7 +20,7 @@ void Logger::toFile(const std::string& filePath)
 
 void Logger::message(const std::string& message)
 {
-	Logger::getStream() << message << std::endl;
+	Logger::getStream() << message << "\n";
 }
 
 void Logger::warning(const std::string& message, const SEVERITY severity)
@@ -33,7 +33,7 @@ void Logger::error(const std::string& message, const SEVERITY severity)
 	Logger::getStream() << "ERROR: " << message << std::endl << "SEVERITY: " << Logger::getSeverity(severity) << "\n";
 
 	if (static_cast<int>(severity) > 0)
-		Game::exit = true;
+		Game::Exit = true;
 	if (static_cast<int>(severity) > 1)
 		throw;
 }

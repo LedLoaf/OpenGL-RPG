@@ -21,11 +21,12 @@ namespace Component
 		this->height = imgHeight;
 
 		if (!image) {
-			std::cerr << "Failed to load texture: " << fileName << "\n";
+			Logger::message("Failed to load texture: " + std::string(fileName));
 			throw;
 		}
 		else {
-			std::cout << "Loading Texture [" << m_id << "] " << width << "x" << height << " at location : \"" << fileName << "\" \n";
+			Logger::message("Loading Texture [" +std::to_string( m_id) + "] " + std::to_string(width) + "x" + std::to_string(height) + " at location : \"" + fileName + "\"");
+			
 		}
 
 		glBindTexture(GL_TEXTURE_2D, m_id);

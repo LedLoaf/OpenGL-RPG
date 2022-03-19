@@ -14,8 +14,7 @@ namespace Component
 
 		std::string vsCode;
 		std::string fsCode;
-
-		std::cout << "Loading Shader [" << this->m_id << "]" << "\t VertexShader: " << m_vsFilename << "\tFragmentShader: " << m_fsFilename << "\n";
+		Logger::message("Loading Shader [" + std::to_string(m_id) + "]" + "\t VertexShader: " + m_vsFilename + "\tFragmentShader: " + m_fsFilename);
 
 		// Load shaders from file
 		try {

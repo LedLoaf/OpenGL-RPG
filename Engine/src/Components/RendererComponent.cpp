@@ -1,3 +1,5 @@
+#include "RendererComponent.h"
+
 #include "RenderComponent.h"
 
 #include <iostream>
@@ -9,10 +11,11 @@ namespace
 
 namespace Component
 {
-	Renderer::Renderer(const std::vector<GLint>& attributes, const GLuint maxSprites)
+	Renderer::Renderer(std::vector<GLint> attributes, const GLuint maxSprites)
 		: m_maxSprites(maxSprites)
 	{
-		std::cout << "Initializing Renderer (Max Sprites = " << maxSprites << ")\n";
+		Logger::message("Initializing Renderer (Max Sprites = " + std::to_string(maxSprites));
+		
 
 		// Calculate total attribute size	
 		for (const auto attrib : attributes) {
@@ -39,9 +42,12 @@ namespace Component
 
 	Renderer::Renderer(Renderer&& other) noexcept
 		: m_vbo(other.m_vbo)
-		, m_vao(other.m_vao)
+	, m_vao(other.m_vao)
+	, m_attribSize(other.m_attribSize)
+	, m_maxSprites(other.m_maxSprites)
+	, m_currentMaterial(nullptr)
 	{
-		// Make the assigning renderer useless
+		// make the assigning renderer useless
 		other.m_vbo = 0;
 		other.m_vao = 0;
 	}
@@ -63,7 +69,7 @@ namespace Component
 		return *this;
 	}
 
-	void Renderer::draw(const Rect& dest, const Rect& src, Component::Material& mat)
+	void Renderer::draw(Rect src, Rect dest, Component::Material& mat)
 	{
 		// Checks if buffer is over sprite limit or current material isn't set
 		// Finally checks if the current material has a different id from the new material
@@ -74,10 +80,10 @@ namespace Component
 			m_currentMaterial = &mat;
 		}
 
-		// Translate src to fractions of the image dimensions
-		Rect normSrc   = src;
-		const auto imgWidth  = mat.texture.width;
-		const auto imgHeight = mat.texture.height;
+		// Translate source to fractions of the image dimensions (automatically normalize)
+		Rect       normSrc   = src;
+		const auto imgWidth  = static_cast<GLfloat>(mat.texture.width);
+		const auto imgHeight = static_cast<GLfloat>(mat.texture.height);
 
 		normSrc.x /= imgWidth;
 		normSrc.y /= imgHeight;
@@ -126,6 +132,11 @@ namespace Component
 		m_buffer.push_back(normSrc.y);
 	}
 
+	void Renderer::draw(const Component::Render render, Component::Material& mat)
+	{
+		Component::Renderer::draw(render.src, render.dest, mat);
+	}
+
 	void Renderer::display()
 	{
 		// Re-buffer changes to data
@@ -148,7 +159,8 @@ namespace Component
 
 	void Renderer::release()
 	{
-		std::cout << "Destroying Renderer\n";
+		Logger::message("Destroying Renderer");
+
 		// Delete buffers if they exist
 		if (m_vbo)
 			glDeleteBuffers(1, &m_vbo);

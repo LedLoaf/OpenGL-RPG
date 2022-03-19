@@ -1,9 +1,12 @@
 #pragma once
 #include <iostream>
+#include <string>
 
 #include "BaseComponent.h"
 
 #include <glad/glad.h>
+
+#include "Logger.h"
 
 namespace Component
 {
@@ -31,7 +34,7 @@ namespace Component
 
 		~Texture() override
 		{
-			std::cout << "Destroying Texture [" << m_id << "]\n";
+			Logger::message("Destroying Texture [" + std::to_string(m_id) + "]");
 
 			if (m_id)
 				glDeleteTextures(1, &m_id);
