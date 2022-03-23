@@ -2,6 +2,7 @@
 #include <glad/glad.h>
 #include <glm/vec2.hpp>
 
+
 /* Defines a rectangle (x,y,w,h) */
 struct Rect
 {
@@ -15,22 +16,22 @@ struct Rect
 	{
 	}
 
-	Rect(GLfloat x, GLfloat y, GLfloat width, GLfloat height)
-		: x(x), y(y), w(width), h(height)
+	Rect(const float x, const float y, const float w, const float h)
+		: x(x), y(y), w(w), h(h)
 	{
 	}
 
-	Rect(GLfloat x, GLfloat y, GLfloat length)
+	Rect(const float x, const float y, const float length)
 		: x(x), y(y), w(length), h(length)
 	{
 	}
 
-	Rect(glm::vec2 pos, GLfloat length)
+	Rect(const glm::vec2 pos, const float length)
 		: x(pos.x), y(pos.y), w(length), h(length)
 	{
 	}
 
-	Rect(glm::vec2 pos)
+	Rect(const glm::vec2 pos)
 		: x(pos.x), y(pos.y), w(0.0f), h(0.0f)
 	{
 	}
@@ -45,19 +46,19 @@ struct Rect
 		set(rect);
 	}
 
-	Rect& operator*(float scaler)
+	Rect& operator*(float scale)
 	{
-		this->w *= scaler;
-		this->h *= scaler;
+		this->w *= scale;
+		this->h *= scale;
 		return *this;
 	}
 
-	void set(float x, float y, float width, float height)
+	void set(const float x, const float y, const float w, const float h)
 	{
 		this->x = x;
 		this->y = y;
-		this->w = width;
-		this->h = height;
+		this->w = w;
+		this->h = h;
 	}
 
 	void set(const Rect& rect)
@@ -70,8 +71,5 @@ struct Rect
 		set(rect.x, rect.y, rect.w, rect.h);
 	}
 
-	float x;
-	float y;
-	float w;
-	float h;
+	float x, y, w, h;
 };

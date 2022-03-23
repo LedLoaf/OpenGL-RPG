@@ -50,6 +50,8 @@ public:
 	~Entity()
 	{
 		--count;
+		m_components.~SplayTree();
+		m_children.~SplayTree();
 	}
 
 	// delete all functions that could possibly copy one entity onto another
@@ -90,7 +92,7 @@ public:
 		return m_children.search(hashedStr);
 	}
 
-	void removeChild(std::string id)
+	void removeChild(const std::string& id)
 	{
 		const auto hashedStr = std::hash<std::string>{}(id);
 		m_children.remove(hashedStr);
@@ -107,6 +109,12 @@ public:
 		return m_children.insert(child);
 	}
 
+	// Inserts entity into child tree with hash of str as unique id
+	Entity* add_child(Entity* entity, const std::string& id)
+	{
+		return m_children.insert(std::hash<std::string>{}(id), entity);
+	}
+
 	// Inserts entity into child tree with hash of string as unique id
 	Entity* addIDChild(Entity* entity, const std::string& id)
 	{
@@ -121,7 +129,7 @@ public:
 		return m_children.insert(hashedStr, entity);
 	}
 
-	// inserts entity into child tree with unique id
+	// Inserts entity into child tree with unique id
 	Entity* addIDChild(Entity* entity, const std::size_t id)
 	{
 		return m_children.insert(id, entity);
@@ -131,12 +139,12 @@ public:
 	template <typename T>
 	T* getComponent()
 	{
-		auto r_comp = m_components.search(getComponentTypeID<T>());
+		auto rComp = m_components.search(getComponentTypeID<T>());
 
-		if (!r_comp)
+		if (!rComp)
 			Logger::error("Could not find component, component id = " + std::to_string(getComponentTypeID<T>()), Logger::SEVERITY::HIGH);
 
-		auto casted_r_comp = dynamic_cast<T*>(r_comp);
+		auto casted_r_comp = dynamic_cast<T*>(rComp);
 
 		if (!casted_r_comp)
 			Logger::error("Component not of casted type", Logger::SEVERITY::HIGH);
@@ -161,7 +169,7 @@ public:
 		return castedRComp;
 	}
 
-	// searches component tree for specific component of hashed string
+	// Searches component tree for specific component of hashed string
 	template <typename T>
 	T* get_component(const std::string id)
 	{
@@ -188,14 +196,14 @@ public:
 		return m_components.search(getComponentTypeID<T>());
 	}
 
-	// checks if string id of component is located in component tree
+	// Checks if string id of component is located in component tree
 	template <typename T> bool hasComponent(const std::string id)
 	{
 		const auto hashedStr = std::hash<std::string>{}(id);
 		return m_components.search(hashedStr);
 	}
 
-	// checks if id of component is located in component tree
+	// Checks if id of component is located in component tree
 	template <typename T> bool has_component(const std::size_t position)
 	{
 		return m_components.search(position);
@@ -220,7 +228,7 @@ public:
 		return component;
 	}
 
-	// adds component to splay tree using a hashed string
+	// Adds component to splay tree using a hashed string
 	template<typename T, typename... TArgs>
 	T* addIDComponent(std::size_t id, TArgs&&... args)
 	{
@@ -254,14 +262,14 @@ public:
 		return m_components.size();
 	}
 
-	// delete all components and children
+	// Delete all components and children
 	void clear()
 	{
 		m_children.clear();
 		m_components.clear();
 	}
 
-	// delete all entity children
+	// Delete all entity children
 	void clearChildren()
 	{
 		m_children.clear();

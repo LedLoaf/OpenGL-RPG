@@ -1,37 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\Components\RendererComponent.cpp" />
-    <ClCompile Include="src\Components\TextureComponent.cpp" />
-    <ClCompile Include="src\Components\ShaderComponent.cpp" />
-    <ClCompile Include="src\Components\MaterialComponent.cpp" />
-    <ClCompile Include="src\Logger.cpp" />
-    <ClCompile Include="src\Json.cpp" />
-    <ClCompile Include="src\DelimiterSplit.cpp" />
-    <ClCompile Include="src\Components\AABB.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\stb_image.h" />
-    <ClInclude Include="src\SplayTree.h" />
-    <ClInclude Include="src\Rect.h" />
     <ClInclude Include="src\Components\BaseComponent.h" />
+    <ClInclude Include="src\Components\ControllerComponent.h" />
+    <ClInclude Include="src\Components\KeyboardComponent.h" />
+    <ClInclude Include="src\Components\MaterialComponent.h" />
+    <ClInclude Include="src\Components\RectComponent.h" />
+    <ClInclude Include="src\Components\RendererComponent.h" />
+    <ClInclude Include="src\Components\ShaderComponent.h" />
+    <ClInclude Include="src\Components\SystemComponent.h" />
+    <ClInclude Include="src\Components\TextureComponent.h" />
+    <ClInclude Include="src\Components\TransformComponent.h" />
+    <ClInclude Include="src\Systems\CameraSystem.h" />
+    <ClInclude Include="src\Systems\MoveSystem.h" />
+    <ClInclude Include="src\Systems\RenderSystem.h" />
+    <ClInclude Include="src\AABB.h" />
+    <ClInclude Include="src\DelimiterSplit.h" />
     <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\Game.h" />
-    <ClInclude Include="src\Components\RendererComponent.h" />
-    <ClInclude Include="src\Components\MaterialComponent.h" />
-    <ClInclude Include="src\Components\TextureComponent.h" />
-    <ClInclude Include="src\Components\ShaderComponent.h" />
     <ClInclude Include="src\Logger.h" />
-    <ClInclude Include="src\DelimiterSplit.h" />
+    <ClInclude Include="src\Rect.h" />
     <ClInclude Include="src\Sort.h" />
-    <ClInclude Include="src\Components\TransformationComponent.h" />
-    <ClInclude Include="src\Components\SystemComponent.h" />
-    <ClInclude Include="src\Systems\RenderSystem.h" />
-    <ClInclude Include="src\Systems\CameraSystem.h" />
-    <ClInclude Include="src\Components\RenderComponent.h" />
-    <ClInclude Include="src\Components\RectComponent.h" />
-    <ClInclude Include="src\Components\AABB.h" />
+    <ClInclude Include="src\SplayTree.h" />
+    <ClInclude Include="src\stb_image.h" />
+    <ClInclude Include="src\Systems\AnimationSystem.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Components\MaterialComponent.cpp" />
+    <ClCompile Include="src\Components\RendererComponent.cpp" />
+    <ClCompile Include="src\Components\ShaderComponent.cpp" />
+    <ClCompile Include="src\Components\TextureComponent.cpp" />
+    <ClCompile Include="src\AABB.cpp" />
+    <ClCompile Include="src\DelimiterSplit.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Json.cpp" />
+    <ClCompile Include="src\Logger.cpp" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
 </Project>

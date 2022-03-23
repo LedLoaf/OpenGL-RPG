@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-#include "BaseComponent.h"
+#include "Components/BaseComponent.h"
 
 #include <glad/glad.h>
 
@@ -17,10 +17,10 @@ namespace Component
 		Texture()
 			: Texture(GL_RGBA, GL_RGBA, GL_REPEAT, GL_REPEAT, GL_NEAREST, GL_NEAREST) {}
 
-		explicit Texture(const GLint imageFormat)
+		explicit Texture(const int imageFormat)
 			: Texture(imageFormat, imageFormat, GL_REPEAT, GL_REPEAT, GL_NEAREST, GL_NEAREST) { }
 
-		Texture(const GLint internalFormat, const GLint imageFormat, const GLint wrapS, const GLint wrapT, const GLint filterMin, const GLint filterMag)
+		Texture(const int internalFormat, const int imageFormat, const int wrapS, const int wrapT, const int filterMin, const int filterMag)
 			: internalFormat{internalFormat},
 			  imageFormat{imageFormat},
 			  wrapS{wrapS},
@@ -45,22 +45,22 @@ namespace Component
 
 		void bind();
 
-		GLuint getId() const { return m_id; }
+		unsigned int getId() const { return m_id; }
 
 	public:
 		// Image dimensions
-		GLint width{}, height{};
+		int width{}, height{};
 
 		// Texture format
-		GLint internalFormat{};
-		GLint imageFormat{};
+		int internalFormat{};
+		int imageFormat{};
 
 		// Texture configurations
-		GLint wrapS{};
-		GLint wrapT{};
-		GLint filterMin{};
-		GLint filterMag{};
+		int wrapS{};
+		int wrapT{};
+		int filterMin{};
+		int filterMag{};
 	private:
-		GLuint m_id{};
+		unsigned int m_id{};
 	};
 }

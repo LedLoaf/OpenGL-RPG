@@ -1,7 +1,5 @@
 #include "RendererComponent.h"
 
-#include "RenderComponent.h"
-
 #include <iostream>
 
 namespace
@@ -11,7 +9,7 @@ namespace
 
 namespace Component
 {
-	Renderer::Renderer(std::vector<GLint> attributes, const GLuint maxSprites)
+	Renderer::Renderer(const std::vector<unsigned int>& attributes, const unsigned int maxSprites)
 		: m_maxSprites(maxSprites)
 	{
 		Logger::message("Initializing Renderer (Max Sprites = " + std::to_string(maxSprites));
@@ -33,7 +31,7 @@ namespace Component
 		// Create and bind attributes to vbo
 		auto ptrStride = 0ull;
 		for (auto i = 0u; i < attributes.size(); ++i) {
-			glVertexAttribPointer(i, attributes[i], GL_FLOAT, GL_FALSE, static_cast<GLsizei>(m_attribSize * sizeof(float)), reinterpret_cast<GLvoid*>(ptrStride));
+			glVertexAttribPointer(i, static_cast<GLint>(attributes[i]), GL_FLOAT, GL_FALSE, static_cast<GLsizei>(m_attribSize * sizeof(float)), reinterpret_cast<GLvoid*>(ptrStride));
 			glEnableVertexAttribArray(i);
 			ptrStride += attributes[i] * sizeof(float);
 		}
@@ -130,11 +128,6 @@ namespace Component
 		m_buffer.push_back(dest.y);
 		m_buffer.push_back(normSrc.x + normSrc.w);
 		m_buffer.push_back(normSrc.y);
-	}
-
-	void Renderer::draw(const Component::Render& render, Component::Material& mat)
-	{
-		Component::Renderer::draw(render.src, render.dest, mat);
 	}
 
 	void Renderer::display()

@@ -4,7 +4,7 @@
 class IComponent
 {
 public:
-	static long long count; // count component references
+	static long long count;				// count component references
 
 	IComponent() { ++count; }
 	virtual ~IComponent() { --count; } // make sure if overloaded to call ~Comp()

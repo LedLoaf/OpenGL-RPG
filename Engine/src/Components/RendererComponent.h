@@ -1,13 +1,12 @@
 #pragma once
 #include "Components/BaseComponent.h"
 #include "Components/MaterialComponent.h"
+#include "Components/RectComponent.h"
 
 #include <glad/glad.h>
 
 #include <vector>
 
-#include "Rect.h"
-#include "RenderComponent.h"
 namespace Component
 {
 	/* Simple batch renderer for drawing sprites from the same image and shader */
@@ -15,7 +14,7 @@ namespace Component
 	{
 	public:
 
-		Renderer(std::vector<GLint> attributes, GLuint maxSprites);
+		Renderer(const std::vector<unsigned int>& attributes, unsigned int maxSprites);
 
 		Renderer(const Renderer&) = delete;
 
@@ -32,7 +31,6 @@ namespace Component
 		void clear(float r = 0, float g = 0, float b = 0, float a = 255);
 
 		void draw(const Rect& src, const Rect& dest, Component::Material& mat);
-		void draw(const Component::Render& render, Component::Material& mat);
 
 		void display();
 
@@ -45,11 +43,11 @@ namespace Component
 		void flush();
 
 	private:
-		GLuint               m_vbo{0};
-		GLuint               m_vao{0};
-		GLuint               m_attribSize{};
-		GLuint               m_maxSprites{};
-		std::vector<GLfloat> m_buffer{};
+		unsigned int               m_vbo{0};
+		unsigned int               m_vao{0};
+		unsigned int               m_attribSize{};
+		unsigned int               m_maxSprites{};
+		std::vector<float> m_buffer{};
 		Component::Material*            m_currentMaterial{nullptr};
 	};
 }

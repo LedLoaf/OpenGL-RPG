@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-#include "BaseComponent.h"
+#include "Components/BaseComponent.h"
 
 #include <glad/glad.h>
 #include <glm/mat4x4.hpp>

@@ -4,24 +4,20 @@
 
 namespace Component
 {
-/* Component implementation for rect data structure */
+	/* Component implementation for rect data structure */
 	class Rectangle : public Rect, public IComponent
 	{
 	public:
 		Rectangle(const Rect& rect)
-			: Rect(rect)
-		{
-		}
+			: Rect(rect) { }
+
 		Rectangle(const float x, const float y, const float w, const float h)
-			: Rect(x, y, w, h)
-		{
-		}
+			: Rect(x, y, w, h) { }
 
 		Rectangle()
-			: Rect()
-		{
-		}
+			: Rect() { }
 	};
-#define Transform Rectangle
-#define Src Rectangle
+
+	using Dest = Rectangle;
+	using Src = Rectangle;
 }

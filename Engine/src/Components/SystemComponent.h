@@ -4,10 +4,9 @@
 namespace Component
 {
 	/* Abstract class for executing updates on components and the window */
-	class System : public IComponent
+	class ISystem : public IComponent
 	{
 	public:
-		System() = default;
 		virtual void execute() = 0;
 	};
 }
